@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime"
+           xmlns:jaxws="http://cxf.apache.org/jaxws"
+           version="2.0">
+    <!--<endpoint name="ActInventoryInformBReg_InImpl"
+              implementation="com.kpbs.productionOrder.ProductionOrder_InImpl"
+              url-pattern="/services/ProductionOrderFaultExample"/>-->
+
+    <endpoint name="TestJaxWs_Impl"
+              implementation="com.example.sample.TestJaxWsImpl"
+              url-pattern="/services/TestJaxWs"/>
+
+   <!--
+   <endpoint name="TestJaxWs_Impl"
+              implementation="com.example.sample.TestJaxWsImpl"
+              url-pattern="/services/StockExceptionTestServiceSoapPortImpl"/>
+              -->
+
+    <endpoint name="CreditCardService_Impl"
+              implementation="com.company.jaxws.handler.cardservice.common.CardServicePortImpl"
+              url-pattern="/services/CreditCardService"/>
+</endpoints>
+
+
+
+
+

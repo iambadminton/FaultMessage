@@ -1,0 +1,52 @@
+<definitions xmlns:tns="http://cardservice.handler.jaxws.company.com/service" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:ns1="http://cardservice.handler.jaxws.company.com/creditcard" 
+	xmlns:ns2="http://cardservice.handler.jaxws.company.com/exception" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	targetNamespace="http://cardservice.handler.jaxws.company.com/service" 
+	name="CardService">
+    <types>
+        <schema targetNamespace="http://cardservice.handler.jaxws.company.com/service" xmlns="http://www.w3.org/2001/XMLSchema">
+            <import schemaLocation="CreditCardAuthorization.xsd" namespace="http://cardservice.handler.jaxws.company.com/creditcard" id="ns1"/>
+            <import schemaLocation="FaultInfo.xsd" namespace="http://cardservice.handler.jaxws.company.com/exception" id="ns2"/>
+        </schema>
+    </types>
+    <message name="AuthorizePayment">
+        <part name="parameters" element="ns1:AuthorizationRequest"/>
+    </message>
+    <message name="AuthorizeStatus">
+        <part name="result" element="ns1:AuthorizationStatus"/>
+    </message>
+    <message name="CardServiceException">
+        <part name="FaultInfo" element="ns2:FaultInfo"/>
+    </message>        
+    <portType name="CardServicePortType">
+        <operation name="authorizePayment">
+            <input message="tns:AuthorizePayment"/>
+            <output message="tns:AuthorizeStatus"/>
+            <fault name="CardServiceException" message="tns:CardServiceException"/>
+        </operation>
+    </portType>
+    <binding name="CardServiceBinding" type="tns:CardServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="authorizePayment">
+            <soap:operation soapAction="tns:authorizePayment"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+            <fault name="CardServiceException">
+                <soap:fault name="CardServiceException" use="literal"/>
+            </fault>
+        </operation>
+    </binding>
+    <service name="CardService">
+        <port name="CardServicePort" binding="tns:CardServiceBinding">
+            <soap:address location="http://localhost:8087/services/CreditCardService"/>
+        </port>
+    </service>
+</definitions>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ProductionOrder_In" targetNamespace="http://esb.z-t-z.ru/Integration/SAP"
+                  xmlns:p1="http://esb.z-t-z.ru/Integration/SAP"
+                  xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+                  xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+    <wsp:UsingPolicy wsdl:required="true"/>
+    <wsp:Policy wsu:Id="OP_ProductionOrder_In"/>
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://esb.z-t-z.ru/Integration/SAP"
+                    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                    xmlns="http://esb.z-t-z.ru/Integration/SAP">
+            <xsd:element name="SaveProductionOrderFault" type="SaveProductionOrderFault"/>
+
+            <xsd:element name="ProductionOrder" type="ProductionOrder"/>
+            <xsd:complexType name="SaveProductionOrderFault">
+                <xsd:sequence>
+                    <xsd:element name="status" type="xsd:int"/>
+                    <xsd:element name="message" type="xsd:string"/>
+                    <xsd:element name="detail" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ProductionOrder">
+                <xsd:sequence>
+                    <xsd:element name="AUFNR">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="MATNR">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="18"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="GAMNG">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:decimal">
+                                <xsd:totalDigits value="18"/>
+                                <xsd:fractionDigits value="3"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ERNAM">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="12"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="FEVOR">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="3"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="GSTRS" type="xsd:date"/>
+                    <xsd:element name="GSUZS" type="xsd:time"/>
+                    <xsd:element name="MATPF">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="18"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="ProductionOrder">
+        <wsdl:documentation/>
+        <wsdl:part name="ProductionOrder" element="p1:ProductionOrder"/>
+    </wsdl:message>
+    <wsdl:message name="ProductionOrderSaveException">
+        <wsdl:documentation/>
+        <wsdl:part name="fault" element="p1:SaveProductionOrderFault"/>
+    </wsdl:message>
+    <wsdl:portType name="ProductionOrder_In">
+        <wsdl:documentation/>
+        <wsdl:operation name="ProductionOrder_In">
+            <wsdl:documentation/>
+            <wsp:Policy>
+                <wsp:PolicyReference URI="#OP_ProductionOrder_In"/>
+            </wsp:Policy>
+            <wsdl:input message="p1:ProductionOrder"/>
+            <wsdl:fault name="SaveProductionOrderFault" message="p1:ProductionOrderSaveException"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ProductionOrder_InBinding" type="p1:ProductionOrder_In">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"
+                      xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+        <wsdl:operation name="ProductionOrder_In">
+            <soap:operation soapAction="http://sap.com/xi/WebService/soap1.1"
+                            xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+            <wsdl:input>
+                <soap:body use="literal"
+                           xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+            </wsdl:input>
+            <wsdl:fault name="SaveProductionOrderFault">
+                <soap12:fault name="SaveProductionOrderFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ProductionOrder_InService">
+        <wsdl:port binding="p1:ProductionOrder_InBinding" name="ProductionOrder_In">
+            <soap:address
+                    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                    location="http://localhost:8080/EGAISSevlet/services/ProductionOrder_In"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:tns="http://cardservice.handler.jaxws.company.com/creditcard" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	targetNamespace="http://cardservice.handler.jaxws.company.com/creditcard">
+            <complexType name="CreditCard">
+                <sequence>
+                    <element name="cardNumber" type="string"/>
+                    <element name="ccvNumber" type="string"/>
+                    <element name="billingAddress" nillable="true" type="tns:Address"/>                    
+                </sequence>
+            </complexType>
+            <complexType name="Address">
+                <sequence>
+                    <element name="addressLine1" nillable="true" type="string"/>
+                    <element name="addressLine2" nillable="true" type="string"/>
+                    <element name="city" nillable="true" type="string"/>
+                    <element name="state" nillable="true" type="string"/>
+                    <element name="zip" nillable="true" type="string"/>
+                </sequence>
+            </complexType>
+            <complexType name="CardUser">
+                <sequence>
+                    <element name="firstName" nillable="true" type="string"/>
+                    <element name="lastName" nillable="true" type="string"/>
+                </sequence>
+            </complexType>
+            <element name="AuthorizationRequest">
+                <complexType>
+                <sequence>
+                    <element name="CreditCard" nillable="true" type="tns:CreditCard"/>
+                    <element name="CardUser" nillable="true" type="tns:CardUser"/>
+                </sequence>
+                </complexType>
+            </element>            
+            <element name="AuthorizationStatus">
+                <complexType>
+                <sequence>
+                    <element name="authorizationToken" nillable="true" type="string"/>
+                    <element name="authorized" type="boolean"/>
+                    <element name="errorCode" type="int"/>
+                </sequence>
+                </complexType>
+            </element>    
+	</schema>

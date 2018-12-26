@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://cardservice.handler.jaxws.company.com/exception" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://cardservice.handler.jaxws.company.com/exception">
+    <element name="FaultInfo">
+    	<complexType>
+        	<sequence>
+            	<element name="faultMessage" nillable="true" type="string"/>
+        	</sequence>
+   		</complexType>
+    </element>
+</schema>
