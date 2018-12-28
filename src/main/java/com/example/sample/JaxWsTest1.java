@@ -1,10 +1,7 @@
 
 package com.example.sample;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
@@ -32,6 +29,7 @@ import javax.xml.bind.annotation.XmlType;
     "information",
     "count"
 })
+@XmlRootElement(name="jaxWsTest1", namespace = "http://example.com/sample")
 public class JaxWsTest1 {
 
     @XmlElement(name = "information", required = true)
@@ -79,4 +77,11 @@ public class JaxWsTest1 {
         this.count = value;
     }
 
+    @Override
+    public String toString() {
+        return "JaxWsTest1{" +
+                "information='" + information + '\'' +
+                ", count=" + count +
+                '}';
+    }
 }

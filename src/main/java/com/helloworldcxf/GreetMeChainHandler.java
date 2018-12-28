@@ -1,31 +1,28 @@
-package com.example.sample;
+package com.helloworldcxf;
+
+import org.apache.log4j.Logger;
 
 import javax.xml.namespace.QName;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPHeader;
 import javax.xml.soap.SOAPMessage;
-import javax.xml.ws.BindingProvider;
 import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.Collections;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
-
-public class JaxWsTestChainHandler implements SOAPHandler<SOAPMessageContext> {
-    private static Logger LOG = Logger.getLogger(JaxWsTestChainHandler.class);
+public class GreetMeChainHandler implements SOAPHandler<SOAPMessageContext> {
+    private static Logger LOG = Logger.getLogger(GreetMeChainHandler.class);
 
     @Override
     public boolean handleMessage(SOAPMessageContext context) {
-        System.out.println(" ===> JaxWs handleMessage <===");
+        System.out.println(" ===> helloworldcxf handleMessage <===");
         Boolean outbound = (Boolean) context.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
         if (outbound) {
             // Include your steps for the outbound flow.
         }
-        try {
+        /*try {
             SOAPMessage message = context.getMessage();
             SOAPHeader header = message.getSOAPHeader();
             String contentType = header.getAttribute("Content-type");
@@ -33,7 +30,7 @@ public class JaxWsTestChainHandler implements SOAPHandler<SOAPMessageContext> {
             System.out.println("SOAPHeader: Content-type=" + contentType);
         } catch (SOAPException e) {
             e.printStackTrace();
-        }
+        }*/
         dumpSOAPMessage(context.getMessage());
         return true;
 
@@ -41,19 +38,19 @@ public class JaxWsTestChainHandler implements SOAPHandler<SOAPMessageContext> {
 
     @Override
     public boolean handleFault(SOAPMessageContext context) {
-        System.out.println(" ===> JaxWs handleFault <===");
+        System.out.println(" ===> helloworldcxf handleFault <===");
         return false;
     }
 
     @Override
     public void close(MessageContext context) {
-        System.out.println(" ===> JaxWs close <===");
+        System.out.println(" ===> helloworldcxf close <===");
 
     }
 
     @Override
     public Set<QName> getHeaders() {
-        System.out.println(" ===> JaxWs getHeaders <===");
+        System.out.println(" ===> helloworldcxf getHeaders <===");
         return null;
     }
 

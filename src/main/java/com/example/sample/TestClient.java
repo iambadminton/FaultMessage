@@ -9,8 +9,12 @@ public class TestClient {
         try {
             TestJaxWsService service = new TestJaxWsService();
             TestJaxWs port = service.getTestJaxWs();
+            /*JaxWsTest1 jaxWsTest1 = new JaxWsTest1();
+            jaxWsTest1.setInformation("information");
+            jaxWsTest1.setCount(4);*/
 
             String returnValue = port.jaxWsTest1( "Invocation test.", 1003 );
+            //String returnValue = port.jaxWsTest1(jaxWsTest1);
 
             System.out.println( "[RESULT] " + returnValue );
         }

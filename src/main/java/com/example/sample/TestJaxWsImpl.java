@@ -11,12 +11,14 @@ import com.sun.xml.messaging.saaj.soap.SOAPVersionMismatchException;
 import org.apache.log4j.Logger;
 
 import javax.jws.*;
+import javax.jws.soap.SOAPBinding;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.namespace.QName;
 import javax.xml.soap.SOAPConstants;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPFactory;
 import javax.xml.soap.SOAPFault;
+import javax.xml.ws.BindingType;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 import javax.xml.ws.soap.SOAPFaultException;
@@ -34,6 +36,7 @@ import javax.xml.ws.soap.SOAPFaultException;
         wsdlLocation = "file:src/main/webapp/WEB-INF/wsdl/input.wsdl",
         endpointInterface = "com.example.sample.TestJaxWs")
 @HandlerChain(name = "ExamplesampleChainHandler", file = "serversoaphandler.xml")
+@javax.jws.soap.SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 public class TestJaxWsImpl implements TestJaxWs {
 
     private static final Logger LOG = Logger.getLogger(TestJaxWsImpl.class);
@@ -41,10 +44,12 @@ public class TestJaxWsImpl implements TestJaxWs {
     /* (non-Javadoc)
      * @see com.example.sample.TestJaxWs#jaxWsTest1(java.lang.String information, int count)*
      */
-    public java.lang.String jaxWsTest1(java.lang.String information, int count) throws UserDefinedException {
+    public java.lang.String jaxWsTest1(java.lang.String information, int count /* JaxWsTest1 jaxWsTest1*/) throws UserDefinedException {
         LOG.info("Executing operation jaxWsTest1");
         System.out.println(information);
+        //System.out.println(jaxWsTest1.information);
         System.out.println(count);
+        //System.out.println(jaxWsTest1.count);
         /*try {
             java.lang.String _return = "";
             return _return;
@@ -70,6 +75,7 @@ public class TestJaxWsImpl implements TestJaxWs {
             }
         }*/
         return information;
+        //return jaxWsTest1.information;
 
     }
 }

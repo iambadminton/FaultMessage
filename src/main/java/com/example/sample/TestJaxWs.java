@@ -17,10 +17,11 @@ import javax.xml.ws.ResponseWrapper;
  */
 @WebService(targetNamespace = "http://esb.z-t-z.ru/Integration/SAP", name = "TestJaxWs")
 @XmlSeeAlso({ObjectFactory.class})
-@SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
+//@SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
+@SOAPBinding(style = SOAPBinding.Style.DOCUMENT, use = SOAPBinding.Use.LITERAL, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED) //28.12.2018 forum advice
 public interface TestJaxWs {
 
-    @WebMethod
+    @WebMethod(operationName = "jaxWsTest1", action = "http://sap.com/xi/WebService/soap1.1")
     @RequestWrapper(localName = "jaxWsTest1", targetNamespace = "http://esb.z-t-z.ru/Integration/SAP", className = "com.example.sample.JaxWsTest1")
     @ResponseWrapper(localName = "jaxWsTest1Response", targetNamespace = "http://esb.z-t-z.ru/Integration/SAP", className = "com.example.sample.JaxWsTest1Response")
     //@WebResult(name = "return", targetNamespace = "")
@@ -29,5 +30,7 @@ public interface TestJaxWs {
         java.lang.String information,
         @WebParam(name = "count", targetNamespace = "")
         int count
+        //@WebParam(name="jaxWsTest1", targetNamespace = "")
+        //JaxWsTest1 jaxWsTest1
     ) throws UserDefinedException;
 }

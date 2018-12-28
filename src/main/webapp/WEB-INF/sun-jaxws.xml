@@ -19,6 +19,10 @@
     <endpoint name="CreditCardService_Impl"
               implementation="com.company.jaxws.handler.cardservice.common.CardServicePortImpl"
               url-pattern="/services/CreditCardService"/>
+
+    <endpoint name="HelloWorldCXF_Impl"
+              implementation="com.helloworldcxf.SoapPortImpl"
+              url-pattern="/services/helloworldcxf"/>
 </endpoints>
 
 
